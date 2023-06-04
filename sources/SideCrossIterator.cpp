@@ -23,7 +23,7 @@ MagicalContainer::SideCrossIterator MagicalContainer::SideCrossIterator::end() c
 
 MagicalContainer::SideCrossIterator &MagicalContainer::SideCrossIterator::operator=(const SideCrossIterator &other) {
     if (&container!= &(other.container))
-        throw runtime_error("hh");
+        throw runtime_error("different containers.");
     if (this != &other) {
         right = other.right;
         left = other.left;

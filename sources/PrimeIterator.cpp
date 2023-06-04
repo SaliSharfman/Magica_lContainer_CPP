@@ -39,7 +39,7 @@ int MagicalContainer::PrimeIterator::operator*() const {
 
 MagicalContainer::PrimeIterator &MagicalContainer::PrimeIterator::operator=(const PrimeIterator &other) {
     if (&container!= &(other.container))
-        throw runtime_error("hh");
+        throw runtime_error("different containers.");
     if (this != &other)
         curr = other.curr;
     return *this;

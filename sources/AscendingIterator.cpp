@@ -17,7 +17,7 @@ MagicalContainer::AscendingIterator &MagicalContainer::AscendingIterator::operat
 
 MagicalContainer::AscendingIterator &MagicalContainer::AscendingIterator::operator=(const AscendingIterator &other) {
     if (&container!= &(other.container))
-        throw runtime_error("hh");
+        throw runtime_error("different containers.");
     if (this != &other)
         curr = other.curr;
     return *this;
