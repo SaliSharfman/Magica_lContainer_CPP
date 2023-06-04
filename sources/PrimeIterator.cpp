@@ -15,6 +15,8 @@ MagicalContainer::PrimeIterator::PrimeIterator(const PrimeIterator &other) : con
 
 
 MagicalContainer::PrimeIterator &MagicalContainer::PrimeIterator::operator++() {
+    if(*this==end())
+        throw runtime_error("cant increment the last element.");
     while (++curr < container.size() && !isPrime(container.elements[(vector<int>::size_type) curr])){}
     return *this;
 }
@@ -36,6 +38,8 @@ int MagicalContainer::PrimeIterator::operator*() const {
 
 
 MagicalContainer::PrimeIterator &MagicalContainer::PrimeIterator::operator=(const PrimeIterator &other) {
+    if (&container!= &(other.container))
+        throw runtime_error("hh");
     if (this != &other)
         curr = other.curr;
     return *this;

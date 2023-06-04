@@ -12,7 +12,11 @@ void MagicalContainer::addElement(int element) {
     elements.insert(insertionPoint, element);
 }
 void MagicalContainer::removeElement(int element) {
+    int size = this->size();
     elements.erase(remove(elements.begin(), elements.end(), element), elements.end());
+    if(this->size()== size)
+        throw runtime_error("element not exist");
 }
+
 
 

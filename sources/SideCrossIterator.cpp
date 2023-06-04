@@ -22,6 +22,8 @@ MagicalContainer::SideCrossIterator MagicalContainer::SideCrossIterator::end() c
 }
 
 MagicalContainer::SideCrossIterator &MagicalContainer::SideCrossIterator::operator=(const SideCrossIterator &other) {
+    if (&container!= &(other.container))
+        throw runtime_error("hh");
     if (this != &other) {
         right = other.right;
         left = other.left;
@@ -30,6 +32,8 @@ MagicalContainer::SideCrossIterator &MagicalContainer::SideCrossIterator::operat
 }
 
 MagicalContainer::SideCrossIterator &MagicalContainer::SideCrossIterator::operator++() {
+    if(*this==end())
+        throw runtime_error("cant increment the last element.");
     if (right>left)
         ++left;
     else

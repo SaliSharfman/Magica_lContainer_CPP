@@ -18,8 +18,6 @@ public:
     void addElement(int element);
     void removeElement(int element);
     int size() const {return elements.size();}
-    
-
 
     //AscendingIterator
     class AscendingIterator {
