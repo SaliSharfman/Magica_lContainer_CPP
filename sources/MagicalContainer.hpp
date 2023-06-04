@@ -11,13 +11,15 @@ private:
 
 public:
     MagicalContainer(){} //default constructor
-    MagicalContainer(MagicalContainer &other): elements(other.elements){}
+    MagicalContainer(MagicalContainer &other): elements(other.elements){}// copy constructor
     ~MagicalContainer(){} //destructor
+    MagicalContainer(MagicalContainer&& other) noexcept; // move constructor
+    MagicalContainer &operator=(MagicalContainer&& other) noexcept; // move assignment operator
     MagicalContainer &operator=(const MagicalContainer &other);
 
     void addElement(int element);
     void removeElement(int element);
-    int size() const {return elements.size();}
+    int size() const {return (int)elements.size();}
 
     //AscendingIterator
     class AscendingIterator {
@@ -26,8 +28,11 @@ public:
         int curr;
 
     public:
-        AscendingIterator(const MagicalContainer &container, int curr = 0): container(container), curr(curr) {}
-        AscendingIterator(const AscendingIterator &other): container(other.container), curr(other.curr) {}
+        AscendingIterator(const MagicalContainer &container, int curr = 0): container(container), curr(curr) {} // constructor
+        AscendingIterator(const AscendingIterator &other): container(other.container), curr(other.curr) {} // copy constructor
+        ~AscendingIterator() {} //destructor
+        AscendingIterator(AscendingIterator&& other) noexcept; // move constructor
+        AscendingIterator& operator=(AscendingIterator&& other) noexcept; // move assignment operator
         int operator*() const;
         AscendingIterator &operator++();
         AscendingIterator &operator=(const AscendingIterator &other);
@@ -47,8 +52,12 @@ public:
         int right, left;
 
     public:
-        SideCrossIterator(const MagicalContainer &container, int right = 0, int left = -1): container(container), right(right), left(left) {}
-        SideCrossIterator(const SideCrossIterator &other): container(other.container), right(other.right), left(other.left) {}
+        SideCrossIterator(const MagicalContainer &container): container(container), right(0), left(-1) {} // defult constructor
+        SideCrossIterator(int right, const MagicalContainer &container,  int left): container(container), right(right), left(left) {}// constructor
+        SideCrossIterator(const SideCrossIterator &other): container(other.container), right(other.right), left(other.left) {}// copy constructor
+        ~SideCrossIterator() {} // destructor
+        SideCrossIterator(SideCrossIterator&& other) noexcept; // move constructor
+        SideCrossIterator& operator=(SideCrossIterator&& other) noexcept; // move assignment operator
         int operator*() const;
         SideCrossIterator begin() const;
         SideCrossIterator end() const;
@@ -67,11 +76,15 @@ public:
 
     private:
         const MagicalContainer &container;
+        vector<int> primeindex;
         int curr;
 
     public:
-        PrimeIterator(const MagicalContainer &cont, int curr = 0);
-        PrimeIterator(const PrimeIterator &other);
+        PrimeIterator(const MagicalContainer &cont, int curr = 0);// constructor
+        PrimeIterator(const PrimeIterator &other);// copy constructor
+        ~PrimeIterator() {} // destructor
+        PrimeIterator(PrimeIterator&& other) noexcept; // move constructor
+        PrimeIterator& operator=(PrimeIterator&& other) noexcept; // move assignment operator
         PrimeIterator &operator++();
         bool isPrime(int element) const;
         int operator*() const;

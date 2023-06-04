@@ -17,8 +17,8 @@ MagicalContainer::SideCrossIterator MagicalContainer::SideCrossIterator::begin()
 MagicalContainer::SideCrossIterator MagicalContainer::SideCrossIterator::end() const {
     int mid = container.size() / 2;
     if (container.size() % 2 == 0) 
-        return SideCrossIterator(container, mid, mid-1);
-    return SideCrossIterator(container, mid, mid);
+        return SideCrossIterator(mid, container, mid-1);
+    return SideCrossIterator(mid, container, mid);
 }
 
 MagicalContainer::SideCrossIterator &MagicalContainer::SideCrossIterator::operator=(const SideCrossIterator &other) {
