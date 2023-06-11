@@ -3,13 +3,16 @@ using namespace std;
 using namespace ariel;
 
 MagicalContainer::PrimeIterator::PrimeIterator(const MagicalContainer &container, int curr) : container(container),curr(curr) {
-    while (this->curr < this->container.size() && !isPrime(this->container.elements[(vector<int>::size_type) this->curr]))
-        this->curr++;
+    int i =0;
+    while (i < this->container.size()){
+        if(isPrime(this->container.elements[(vector<int>::size_type) i]))
+            this->primeptr.push_back(&container.elements[(vector<int>::size_type)i]);
+        i++;
+    }
 }
 
-MagicalContainer::PrimeIterator::PrimeIterator(const PrimeIterator &other) : container(other.container), curr(other.curr) {
-    while (this->curr < this->container.size() && !isPrime(this->container.elements[(vector<int>::size_type) this->curr]))
-        this->curr++;
+MagicalContainer::PrimeIterator::PrimeIterator(const PrimeIterator &other) : container(other.container), curr(other.curr), primeptr(other.primeptr){
+   
 }
 
 
@@ -17,7 +20,7 @@ MagicalContainer::PrimeIterator::PrimeIterator(const PrimeIterator &other) : con
 MagicalContainer::PrimeIterator &MagicalContainer::PrimeIterator::operator++() {
     if(*this==end())
         throw runtime_error("cant increment the last element.");
-    while (++curr < container.size() && !isPrime(container.elements[(vector<int>::size_type) curr])){}
+    curr++;
     return *this;
 }
 
@@ -33,7 +36,7 @@ bool MagicalContainer::PrimeIterator::isPrime(int element) const {
 }
 
 int MagicalContainer::PrimeIterator::operator*() const {
-    return this->container.elements[(std::vector<int>::size_type) curr];
+    return *this->primeptr[(std::vector<int>::size_type) curr];
 }
 
 

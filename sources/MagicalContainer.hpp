@@ -76,7 +76,7 @@ public:
 
     private:
         const MagicalContainer &container;
-        vector<int> primeindex;
+        vector<const int*> primeptr;
         int curr;
 
     public:
@@ -93,8 +93,9 @@ public:
         bool operator!=(const PrimeIterator &other) const{return curr != other.curr;}
         bool operator>(const PrimeIterator &other) const{return curr > other.curr;}
         bool operator<(const PrimeIterator &other) const{return curr < other.curr;}
+        int size() const { return static_cast<int>(this->primeptr.size()); }
         PrimeIterator begin() const{return PrimeIterator(this->container, 0);}
-        PrimeIterator end() const{return PrimeIterator(this->container, this->container.size());}
+        PrimeIterator end() const{return PrimeIterator(this->container, this->size());}
     
     };
 };
